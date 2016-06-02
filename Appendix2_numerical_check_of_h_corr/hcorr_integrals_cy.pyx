@@ -87,7 +87,7 @@ cdef class HCorr:
             print 'WARNING: L < 2 sigma, probably not enough'
         sigma = math.sqrt(self.beta_star)
         r = [- L_by_sigma * sigma, L_by_sigma * sigma]
-        options = {'limit': 200, 'points': [0.0]}
+        options = {'limit': 200, 'points': [0.0], 'epsabs': 1e-10, 'epsrel': 5e-10}
         I_r, err_r = nquad(self._f_real, [r, r, r], args=k_vec, opts=options)
         I_i, err_i = nquad(self._f_imag, [r, r, r], args=k_vec, opts=options)
         return I_r, err_r, I_i, err_i
